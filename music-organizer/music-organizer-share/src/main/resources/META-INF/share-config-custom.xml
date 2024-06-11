@@ -426,11 +426,21 @@
                     <!-- AX Props appearance -->                    
                     <set id="axMusicSet" appearance="bordered-panel" label-id="form.set.label.ax.music"/>
                     <!-- <field ...> <control template="/org/alfresco/components/form/controls/textfield.ftl"/> </field> -->
-                    <field id="ax:composer" label-id="form.field.label.ax.composer" set="axMusicSet"/>
-                    <field id="ax:singer" label-id="form.field.label.ax.singer" set="axMusicSet"/>
-                    <field id="ax:country" label-id="form.field.label.ax.country" set="axMusicSet"/>
-                    <field id="ax:mood" label-id="form.field.label.ax.mood" set="axMusicSet"/>
-                    <field id="ax:ip" label-id="form.field.label.ax.ip" set="axMusicSet"/>
+                    <field id="ax:composer" label-id="form.field.label.ax.composer" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
+                    <field id="ax:singer" label-id="form.field.label.ax.singer" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
+                    <field id="ax:country" label-id="form.field.label.ax.country" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
+                    <field id="ax:mood" label-id="form.field.label.ax.mood" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
+                    <field id="ax:ip" label-id="form.field.label.ax.ip" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
                 </appearance>
             </form>
         </forms>
