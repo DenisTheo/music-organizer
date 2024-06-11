@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Definition of new Model -->
+<model name="ax:musicModel" xmlns="http://www.alfresco.org/model/dictionary/1.0">
+    <!-- Optional meta-data about the model -->
+    <description>Music file model with extended metadata support</description>
+    <author>Theo Denis</author>
+    <version>1.0</version>
+    
+    <!-- Imports are required to allow references to definitions in other models -->
+    <imports>
+        <import uri="http://www.alfresco.org/model/dictionary/1.0" prefix="d"/>
+        <import uri="http://www.alfresco.org/model/content/1.0" prefix="cm"/>
+      	<import uri="http://www.alfresco.org/model/audio/1.0" prefix="audio"/>
+    </imports>
+
+    <namespaces>
+        <namespace uri="http://www.amexio.fr/model/content/1.0" prefix="ax"/>
+    </namespaces>
+
+    <types>
+        <type name="ax:music">
+            <title>Music File</title>
+            <parent>audio:audio</parent>
+            <properties>
+			    <property name="ax:fileExtension">
+			        <title>File Extension</title>
+			        <type>d:text</type>
+			    </property>
+			    <property name="ax:path">
+			        <title>File Path</title>
+			        <type>d:text</type>
+			    </property>
+			    <!-- Music Specific Metadata -->
+			    <property name="ax:songTitle">
+			        <title>Song Title</title>
+			        <type>d:text</type>
+			    </property>
+			    <property name="ax:album">
+			        <title>Album</title>
+			        <type>d:text</type>
+			    </property>
+			    <property name="ax:artist">
+			        <title>Artist</title>
+			        <type>d:text</type>
+			    </property>
+			    <property name="ax:albumArtist">
+			        <title>Album Artist</title>
+			        <type>d:text</type>
+			    </property>
+			    <property name="ax:genre">
+			        <title>Genre</title>
+			        <type>d:text</type>
+			    </property>
+			    <property name="ax:year">
+			        <title>Release Year</title>
+			        <type>d:int</type>
+			    </property>
+			    <property name="ax:discNumber">
+			        <title>Disc Number</title>
+			        <type>d:int</type>
+			    </property>
+			    <property name="ax:trackNumber">
+			        <title>Track Number</title>
+			        <type>d:int</type>
+			    </property>
+			</properties>
+            <associations>
+		        <association name="ax:albumCover">
+		            <source>
+		                <mandatory>false</mandatory>
+		                <many>true</many>
+		            </source>
+		            <target>
+		                <class>cm:content</class>
+		                <mandatory>false</mandatory>
+		                <many>false</many>
+		            </target>
+		        </association>
+            </associations>
+        </type>
+    </types>
+
+    <aspects>
+        <!-- Composer of the Music, can also be used to represent Arranger -->
+        <aspect name="ax:composer">
+            <title>Composer</title>
+            <properties>
+                <property name="ax:composerName">
+                    <title>Composer Name</title>
+                    <type>d:text</type>
+                    <multiple>true</multiple>
+                </property>
+            </properties>
+        </aspect>
+        <!-- Music Singer if Applicable -->
+        <aspect name="ax:singer">
+            <title>Singer</title>
+            <properties>
+                <property name="ax:singerName">
+                    <title>Singer Name</title>
+                    <type>d:text</type>
+                    <multiple>true</multiple>
+                </property>
+            </properties>
+        </aspect>
+        <!-- Country where the Music is Originally From -->
+        <aspect name="ax:country">
+            <title>Country</title>
+            <properties>
+                <property name="ax:countryName">
+                    <title>Country Name</title>
+                    <type>d:text</type>
+                    <multiple>false</multiple>
+                </property>
+            </properties>
+        </aspect>
+   		<!-- Mood of the Music -->
+        <aspect name="ax:mood">
+            <title>Mood</title>
+            <properties>
+                <property name="ax:moodName">
+                    <title>Mood Value</title>
+                    <type>d:text</type>
+                    <multiple>true</multiple>
+                </property>
+            </properties>
+        </aspect>
+        <!-- Intellectual Property of the Music if Applicable -->
+        <aspect name="ax:ip">
+            <title>IP</title>
+            <properties>
+                <property name="ax:ipName">
+                    <title>IP Value</title>
+                    <type>d:text</type>
+                    <multiple>true</multiple>
+                </property>
+            </properties>
+        </aspect>
+    </aspects>
+</model>
