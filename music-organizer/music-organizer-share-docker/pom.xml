@@ -23,6 +23,7 @@
             <version>1.0-SNAPSHOT</version>
             <type>amp</type>
         </dependency>
+        <!-- Add any additional AMPs or extension JARs here that you want to be deployed in Alfresco -->
         <dependency>
 		    <groupId>org.orderofthebee.support-tools</groupId>
 		    <artifactId>support-tools-share</artifactId>
