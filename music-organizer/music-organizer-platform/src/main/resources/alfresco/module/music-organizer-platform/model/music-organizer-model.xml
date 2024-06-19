@@ -20,7 +20,7 @@
     <types>
         <type name="ax:music">
             <title>Music File</title>
-            <parent>audio:audio</parent>
+            <parent>cm:content</parent>
             <properties>
 			    <property name="ax:fileExtension">
 			        <title>File Extension</title>

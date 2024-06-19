@@ -173,7 +173,19 @@
                     <show id="surf:mid"/>
                     <show id="surf:label"/>
 
-                    <!-- ax:music aspect -->
+                    <!-- ax:music type -->
+                    <show id="ax:path" force="true"/>
+                    <show id="ax:fileExtension" force="true"/>
+                    <show id="ax:songTitle" force="true"/>
+                    <show id="ax:album" force="true"/>
+                    <show id="ax:artist" force="true"/>
+                    <show id="ax:albumArtist" force="true"/>
+                    <show id="ax:genre" force="true"/>
+                    <show id="ax:year" force="true"/>
+                    <show id="ax:discNumber" force="true"/>
+                    <show id="ax:trackNumber" force="true"/>
+
+                    <!-- ax aspects -->
                     <show id="ax:composerName" force="true"/>
                     <show id="ax:singerName" force="true"/>
                     <show id="ax:countryName" force="true"/>
@@ -231,11 +243,53 @@
 
                     <!-- AX Props appearance -->
                     <set id="axMusicSet" appearance="bordered-panel" label-id="form.set.label.ax.music"/>
-                    <field id="ax:composer" label-id="form.field.label.ax.composer" set="axMusicSet"/>
-                    <field id="ax:singer" label-id="form.field.label.ax.singer" set="axMusicSet"/>
-                    <field id="ax:country" label-id="form.field.label.ax.country" set="axMusicSet"/>
-                    <field id="ax:mood" label-id="form.field.label.ax.mood" set="axMusicSet"/>
-                    <field id="ax:ip" label-id="form.field.label.ax.ip" set="axMusicSet"/>
+                    
+                    <field id="ax:fileExtension" label-id="form.field.label.ax.fileExtension" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
+                    <field id="ax:path" label-id="form.field.label.ax.path" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
+                    <field id="ax:songTitle" label-id="form.field.label.ax.title" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
+                    <field id="ax:album" label-id="form.field.label.ax.album" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
+                    <field id="ax:artist" label-id="form.field.label.ax.artist" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
+					<field id="ax:albumArtist" label-id="form.field.label.ax.albumArtist" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
+                    <field id="ax:genre" label-id="form.field.label.ax.genre" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
+                    <field id="ax:year" label-id="form.field.label.ax.year" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
+                    <field id="ax:discNumber" label-id="form.field.label.ax.discNo" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
+                    <field id="ax:trackNumber" label-id="form.field.label.ax.trackNo" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
+					
+					<field id="ax:composer" label-id="form.field.label.ax.composer" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
+                    <field id="ax:singer" label-id="form.field.label.ax.singer" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
+                    <field id="ax:country" label-id="form.field.label.ax.country" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
+                    <field id="ax:mood" label-id="form.field.label.ax.mood" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
+                    <field id="ax:ip" label-id="form.field.label.ax.ip" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
                 </appearance>
             </form>
 
@@ -287,11 +341,53 @@
 
                     <!-- AX Props appearance -->
                     <set id="axMusicSet" appearance="bordered-panel" label-id="form.set.label.ax.music"/>
-                    <field id="ax:composer" label-id="form.field.label.ax.composer" set="axMusicSet"/>
-                    <field id="ax:singer" label-id="form.field.label.ax.singer" set="axMusicSet"/>
-                    <field id="ax:country" label-id="form.field.label.ax.country" set="axMusicSet"/>
-                    <field id="ax:mood" label-id="form.field.label.ax.mood" set="axMusicSet"/>
-                    <field id="ax:ip" label-id="form.field.label.ax.ip" set="axMusicSet"/>
+                    
+                    <field id="ax:fileExtension" label-id="form.field.label.ax.fileExtension" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
+                    <field id="ax:path" label-id="form.field.label.ax.path" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
+                    <field id="ax:songTitle" label-id="form.field.label.ax.title" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
+                    <field id="ax:album" label-id="form.field.label.ax.album" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
+                    <field id="ax:artist" label-id="form.field.label.ax.artist" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
+					<field id="ax:albumArtist" label-id="form.field.label.ax.albumArtist" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
+                    <field id="ax:genre" label-id="form.field.label.ax.genre" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
+                    <field id="ax:year" label-id="form.field.label.ax.year" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
+                    <field id="ax:discNumber" label-id="form.field.label.ax.discNo" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
+                    <field id="ax:trackNumber" label-id="form.field.label.ax.trackNo" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
+					
+					<field id="ax:composer" label-id="form.field.label.ax.composer" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
+                    <field id="ax:singer" label-id="form.field.label.ax.singer" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
+                    <field id="ax:country" label-id="form.field.label.ax.country" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
+                    <field id="ax:mood" label-id="form.field.label.ax.mood" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
+                    <field id="ax:ip" label-id="form.field.label.ax.ip" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
                 </appearance>
             </form>
 
@@ -304,6 +400,17 @@
                     <show id="cm:description" force="true"/>
 
                     <!-- AX custom props -->
+                    <show id="ax:path" force="true"/>
+                    <show id="ax:fileExtension" force="true"/>
+                    <show id="ax:songTitle" force="true"/>
+                    <show id="ax:album" force="true"/>
+                    <show id="ax:artist" force="true"/>
+                    <show id="ax:albumArtist" force="true"/>
+                    <show id="ax:genre" force="true"/>
+                    <show id="ax:year" force="true"/>
+                    <show id="ax:discNumber" force="true"/>
+                    <show id="ax:trackNumber" force="true"/>
+                    
                     <show id="ax:composer"/>
                     <show id="ax:singer"/>
                     <show id="ax:country"/>
@@ -328,11 +435,53 @@
 
                     <!-- AX Props appearance -->
                     <set id="axMusicSet" appearance="bordered-panel" label-id="form.set.label.ax.music"/>
-                    <field id="ax:composer" label-id="form.field.label.ax.composer" set="axMusicSet"/>
-                    <field id="ax:singer" label-id="form.field.label.ax.singer" set="axMusicSet"/>
-                    <field id="ax:country" label-id="form.field.label.ax.country" set="axMusicSet"/>
-                    <field id="ax:mood" label-id="form.field.label.ax.mood" set="axMusicSet"/>
-                    <field id="ax:ip" label-id="form.field.label.ax.ip" set="axMusicSet"/>
+                    
+                    <field id="ax:fileExtension" label-id="form.field.label.ax.fileExtension" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
+                    <field id="ax:path" label-id="form.field.label.ax.path" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
+                    <field id="ax:songTitle" label-id="form.field.label.ax.title" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
+                    <field id="ax:album" label-id="form.field.label.ax.album" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
+                    <field id="ax:artist" label-id="form.field.label.ax.artist" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
+					<field id="ax:albumArtist" label-id="form.field.label.ax.albumArtist" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
+                    <field id="ax:genre" label-id="form.field.label.ax.genre" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
+                    <field id="ax:year" label-id="form.field.label.ax.year" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
+                    <field id="ax:discNumber" label-id="form.field.label.ax.discNo" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
+                    <field id="ax:trackNumber" label-id="form.field.label.ax.trackNo" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
+					
+					<field id="ax:composer" label-id="form.field.label.ax.composer" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
+                    <field id="ax:singer" label-id="form.field.label.ax.singer" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
+                    <field id="ax:country" label-id="form.field.label.ax.country" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
+                    <field id="ax:mood" label-id="form.field.label.ax.mood" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
+                    <field id="ax:ip" label-id="form.field.label.ax.ip" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
                 </appearance>
             </form>
         </forms>
@@ -351,6 +500,17 @@
                     <show id="app:editInline" force="true"/>
 
                     <!-- AX custom props -->
+                    <show id="ax:path" force="true"/>
+                    <show id="ax:fileExtension" force="true"/>
+                    <show id="ax:songTitle" force="true"/>
+                    <show id="ax:album" force="true"/>
+                    <show id="ax:artist" force="true"/>
+                    <show id="ax:albumArtist" force="true"/>
+                    <show id="ax:genre" force="true"/>
+                    <show id="ax:year" force="true"/>
+                    <show id="ax:discNumber" force="true"/>
+                    <show id="ax:trackNumber" force="true"/>
+                    
                     <show id="ax:composer"/>
                     <show id="ax:singer"/>
                     <show id="ax:country"/>
@@ -384,11 +544,53 @@
 
                     <!-- AX Props appearance -->
                     <set id="axMusicSet" appearance="bordered-panel" label-id="form.set.label.ax.music"/>
-                    <field id="ax:composer" label-id="form.field.label.ax.composer" set="axMusicSet"/>
-                    <field id="ax:singer" label-id="form.field.label.ax.singer" set="axMusicSet"/>
-                    <field id="ax:country" label-id="form.field.label.ax.country" set="axMusicSet"/>
-                    <field id="ax:mood" label-id="form.field.label.ax.mood" set="axMusicSet"/>
-                    <field id="ax:ip" label-id="form.field.label.ax.ip" set="axMusicSet"/>
+                    
+                    <field id="ax:fileExtension" label-id="form.field.label.ax.fileExtension" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
+                    <field id="ax:path" label-id="form.field.label.ax.path" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
+                    <field id="ax:songTitle" label-id="form.field.label.ax.title" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
+                    <field id="ax:album" label-id="form.field.label.ax.album" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
+                    <field id="ax:artist" label-id="form.field.label.ax.artist" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
+					<field id="ax:albumArtist" label-id="form.field.label.ax.albumArtist" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
+                    <field id="ax:genre" label-id="form.field.label.ax.genre" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
+                    <field id="ax:year" label-id="form.field.label.ax.year" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
+                    <field id="ax:discNumber" label-id="form.field.label.ax.discNo" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
+                    <field id="ax:trackNumber" label-id="form.field.label.ax.trackNo" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
+					
+					<field id="ax:composer" label-id="form.field.label.ax.composer" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
+                    <field id="ax:singer" label-id="form.field.label.ax.singer" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
+                    <field id="ax:country" label-id="form.field.label.ax.country" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
+                    <field id="ax:mood" label-id="form.field.label.ax.mood" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
+                    <field id="ax:ip" label-id="form.field.label.ax.ip" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
                 </appearance>
             </form>
             
@@ -403,6 +605,17 @@
                     <show id="cm:modifier"/>
 
                     <!-- AX custom props -->
+                    <show id="ax:path" force="true"/>
+                    <show id="ax:fileExtension" force="true"/>
+                    <show id="ax:songTitle" force="true"/>
+                    <show id="ax:album" force="true"/>
+                    <show id="ax:artist" force="true"/>
+                    <show id="ax:albumArtist" force="true"/>
+                    <show id="ax:genre" force="true"/>
+                    <show id="ax:year" force="true"/>
+                    <show id="ax:discNumber" force="true"/>
+                    <show id="ax:trackNumber" force="true"/>
+                    
                     <show id="ax:composer"/>
                     <show id="ax:singer"/>
                     <show id="ax:country"/>
@@ -423,10 +636,41 @@
                         <control template="/org/alfresco/components/form/controls/daterange.ftl"/>
                     </field>
 
-                    <!-- AX Props appearance -->                    
+                    <!-- AX Props appearance -->
                     <set id="axMusicSet" appearance="bordered-panel" label-id="form.set.label.ax.music"/>
-                    <!-- <field ...> <control template="/org/alfresco/components/form/controls/textfield.ftl"/> </field> -->
-                    <field id="ax:composer" label-id="form.field.label.ax.composer" set="axMusicSet">
+                    
+                    <field id="ax:fileExtension" label-id="form.field.label.ax.fileExtension" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
+                    <field id="ax:path" label-id="form.field.label.ax.path" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
+                    <field id="ax:songTitle" label-id="form.field.label.ax.title" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
+                    <field id="ax:album" label-id="form.field.label.ax.album" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
+                    <field id="ax:artist" label-id="form.field.label.ax.artist" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
+					<field id="ax:albumArtist" label-id="form.field.label.ax.albumArtist" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
+                    <field id="ax:genre" label-id="form.field.label.ax.genre" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
+                    <field id="ax:year" label-id="form.field.label.ax.year" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
+                    <field id="ax:discNumber" label-id="form.field.label.ax.discNo" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
+                    <field id="ax:trackNumber" label-id="form.field.label.ax.trackNo" set="axMusicSet">
+						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
+					</field>
+					
+					<field id="ax:composer" label-id="form.field.label.ax.composer" set="axMusicSet">
 						<control template="/org/alfresco/components/form/controls/textfield.ftl"/>
 					</field>
                     <field id="ax:singer" label-id="form.field.label.ax.singer" set="axMusicSet">
