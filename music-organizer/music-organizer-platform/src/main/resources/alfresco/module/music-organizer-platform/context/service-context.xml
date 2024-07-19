@@ -36,4 +36,10 @@
         <property name="nodeService" ref="NodeService" />
         <property name="nodeLocatorService" ref="nodeLocatorService" />
     </bean> -->
+    
+    <!--
+    <bean id="audioMetadataExtractAction" class="fr.amexio.music.AudioMetadataExtract">
+        <property name="nodeService" ref="NodeService"/>
+        <property name="contentService" ref="ContentService"/>
+    </bean> -->
 </beans>

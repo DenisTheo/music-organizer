@@ -66,6 +66,10 @@ services:
         - 5672:5672 # AMQP
         - 61616:61616 # OpenWire
         - 61613:61613 # STOMP
+  
+  # Manually Added    
+  transform-core-aio:
+    image: alfresco/alfresco-transform-core-aio:3.0.0
 
 volumes:
   music-organizer-acs-volume:

@@ -1,0 +1,13 @@
+<webscript>
+    <shortname>Generate Playlist</shortname>
+    <description>Generates a playlist from a list of music files (.xspf format)</description>
+    
+    <url>/fr/amexio/music/make-playlist</url>
+    
+    <format default="html">
+        <output>xml</output>
+    </format>
+    
+    <authentication>user</authentication>
+    <transaction>required</transaction>
+</webscript>
