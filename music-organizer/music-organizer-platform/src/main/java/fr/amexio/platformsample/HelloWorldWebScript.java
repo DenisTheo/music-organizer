@@ -33,11 +33,12 @@ import java.util.Map;
  * @author martin.bergljung@alfresco.com
  * @since 2.1.0
  */
-public class HelloWorldWebScript extends DeclarativeWebScript {
+public class HelloWorldWebScript extends DeclarativeWebScript
+{
     private static Log logger = LogFactory.getLog(HelloWorldWebScript.class);
 
-    protected Map<String, Object> executeImpl(
-            WebScriptRequest req, Status status, Cache cache) {
+    protected Map<String, Object> executeImpl(WebScriptRequest req, Status status, Cache cache)
+{
         Map<String, Object> model = new HashMap<String, Object>();
         model.put("fromJava", "HelloFromJava");
 

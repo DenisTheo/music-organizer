@@ -24,12 +24,12 @@
 		  parent="webscript">
 	</bean>
 	
-	<!--<bean id="webscript.fr.amexio.music.xspf-playlist.put"
-		  class="fr.amexio.music.PlaylistMaker"
+	<!--<bean id="webscript.fr.amexio.music.XSPFPlaylist.get"
+		  class="fr.amexio.music.XSPFPlaylist"
 		  parent="webscript">
 	    <property name="authentication" value="user"/>
-	    <property name="descPath" value="alfresco/module/music-organizer-platform/webscripts/fr/amexio/music/xspf-playlist.put.desc.xml"/>
-	    <property name="scriptPath" value="alfresco/module/music-organizer-platform/webscripts/fr/amexio/music/xspf-playlist.put.js"/>
+	    <property name="descPath" value="alfresco/module/music-organizer-platform/webscripts/fr/amexio/music/XSPFPlaylist.get.desc.xml"/>
+	    <property name="scriptPath" value="alfresco/module/music-organizer-platform/webscripts/fr/amexio/music/XSPFPlaylist.get.js"/>
 		<property name="useDefaultConfiguration" value="true"/>
 	    <property name="nodeService" ref="NodeService"/>
 	    <property name="contentService" ref="ContentService"/>

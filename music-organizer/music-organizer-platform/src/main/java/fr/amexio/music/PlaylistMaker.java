@@ -58,7 +58,7 @@ public class PlaylistMaker extends DeclarativeWebScript
 	}
 
 	@Override
-    protected Map<String, Object> executeImpl(WebScriptRequest req, Status status) //WebScriptResult res instead of Status status ?
+    protected Map<String, Object> executeImpl(WebScriptRequest req, Status status) //"WebScriptResult res" instead of "Status status" ?
 	{
 		Map<String, Object> model = new HashMap<>();
 
@@ -66,15 +66,13 @@ public class PlaylistMaker extends DeclarativeWebScript
 		String[] paths = {};
 
 		if (pathsParam != null)
-		{
 			paths = pathsParam.split(",");
-		}
 
 		if (paths.length == 0)
 		{
-			status.setCode(400, "No path provided.");
 			//res.setStatus(400);
 			//res.getWriter().write("No path provided.");
+			status.setCode(400, "No path provided.");
 			return null;
 		}
 

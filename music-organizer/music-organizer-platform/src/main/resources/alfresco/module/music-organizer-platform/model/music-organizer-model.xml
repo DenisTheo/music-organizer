@@ -14,7 +14,7 @@
     </imports>
 
     <namespaces>
-        <namespace uri="http://www.amexio.fr/model/content/1.0" prefix="ax"/>
+        <namespace uri="http://www.amexio.fr/model/music/1.0" prefix="ax"/>
     </namespaces>
 
     <types>

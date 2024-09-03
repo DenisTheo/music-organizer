@@ -2,7 +2,7 @@
 <playlist version="1" xmlns="http://xspf.org/ns/0/">
     <trackList>
     	<#list paths as path>
-	        <track>
+        	<track>
 	            <location>${path}</location>
 	        </track>
         </#list>
