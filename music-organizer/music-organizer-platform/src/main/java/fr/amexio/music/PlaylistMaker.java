@@ -1,83 +1,89 @@
 package fr.amexio.music;
 
-import org.alfresco.model.ContentModel;
-import org.alfresco.service.namespace.QName;
-import org.alfresco.service.cmr.repository.NodeService;
-import org.alfresco.service.cmr.repository.ChildAssociationRef;
-import org.alfresco.service.cmr.repository.ContentService;
-import org.alfresco.service.cmr.repository.MimetypeService;
-import org.alfresco.service.cmr.repository.NodeRef;
-import org.springframework.extensions.webscripts.DeclarativeWebScript;
-import org.springframework.extensions.webscripts.Status;
-import org.springframework.extensions.webscripts.WebScriptRequest;
-import org.springframework.extensions.webscripts.WebScriptResponse;
-import java.io.IOException;
-import java.util.HashMap;
+import java.io.Serializable;
+import java.util.List;
 import java.util.Map;
+import org.alfresco.model.ContentModel;
+import org.alfresco.service.cmr.repository.ContentWriter;
+import org.alfresco.service.cmr.repository.NodeRef;
+import org.alfresco.service.cmr.repository.ContentService;
+import org.alfresco.service.cmr.repository.NodeService;
+import org.alfresco.service.namespace.QName;
+import org.alfresco.service.cmr.repository.MimetypeService;
+import org.springframework.beans.factory.annotation.Autowired;
 
-public class PlaylistMaker extends DeclarativeWebScript
+
+public class PlaylistMaker
 {
-	private NodeService nodeService;
-	private ContentService contentService;
-	private MimetypeService mimetypeService;
-	private String conditions;
-	
-	public void init()
-	{
-		
+	@Autowired
+    private ContentService contentService;
+
+    @Autowired
+    private NodeService nodeService;
+
+    @Autowired
+    private MimetypeService mimetypeService;
+    
+    public void createPlaylist(List<Music> musics, NodeRef targetFolder, String playlistName)
+    {
+    	Map<QName, Serializable> props = Map.of(ContentModel.PROP_NAME, playlistName+".xspf");
+
+        // Create the new file in the specified folder
+        NodeRef playlistFile = nodeService.createNode(targetFolder, ContentModel.ASSOC_CONTAINS,
+            QName.createQName(ContentModel.PROP_NAME.getNamespaceURI(), playlistName),
+            ContentModel.TYPE_CONTENT, props).getChildRef();
+
+            // Write the content to the file
+        ContentWriter writer = contentService.getWriter(playlistFile, ContentModel.PROP_CONTENT, true);
+        writer.setMimetype(mimetypeService.getMimetype("xspf"));
+        writer.setEncoding("UTF-8");
+        writer.putContent(generateXSPFContent(musics));
 	}
-		
-	public boolean fileCheck(ChildAssociationRef test)
+    
+    public void createPlaylist(NodeRef targetFolder, List<Music> musics)
 	{
-		NodeRef parentRef = test.getParentRef();
-		//conditions
-		
-		if (nodeService.exists(parentRef) && nodeService.hasAspect(parentRef, QName.createQName("http://www.amexio.fr/model/content/1.0", "ax:composer")))
-		{
-			//TODO
-			
-			return true;
-		}
-		
-		return false;
+    	createPlaylist(musics, targetFolder, generateFileName());
 	}
+    
+    /**
+     * Generates the content of an XSPF Playlist file using Music type objects
+     * 
+     * @param musics List of Musics to put in the playlist
+     * @return the content of an XSPF Playlist file
+     */
+    public String generateXSPFContent(List<Music> musics)
+    {
+        StringBuilder sb = new StringBuilder();
 
-	public void setNodeService(NodeService nodeService)
-	{
-		this.nodeService = nodeService;
-	}
-
-	public void setContentService(ContentService contentService)
-	{
-		this.contentService = contentService;
-	}
-
-	public void setMimetypeService(MimetypeService mimetypeService)
-	{
-		this.mimetypeService = mimetypeService;
-	}
-
-	@Override
-    protected Map<String, Object> executeImpl(WebScriptRequest req, Status status) //"WebScriptResult res" instead of "Status status" ?
-	{
-		Map<String, Object> model = new HashMap<>();
-
-		String pathsParam = req.getParameter("paths");
-		String[] paths = {};
-
-		if (pathsParam != null)
-			paths = pathsParam.split(",");
-
-		if (paths.length == 0)
-		{
-			//res.setStatus(400);
-			//res.getWriter().write("No path provided.");
-			status.setCode(400, "No path provided.");
-			return null;
-		}
-
-		model.put("paths", paths);
-
-		return model;
-	}
+        sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
+        sb.append("<playlist version=\"1\" xmlns=\"http://xspf.org/ns/0/\">\n");
+        sb.append("    <trackList>\n");
+        
+        if (musics != null && musics.size() > 0)
+	        for (Music music : musics)
+	        {
+	            sb.append("        <track>\n");
+	            sb.append("            <location>").append(music.getLink()).append("</location>\n");
+	            if (music.hasTitle())
+	                sb.append("            <title>").append(music.getTitle()).append("</title>\n");
+	            sb.append("        </track>\n");
+	        }
+        
+        sb.append("    </trackList>\n");
+        sb.append("</playlist>\n");
+        
+        return sb.toString();
+    }
+    
+    /**
+     * Generates a filename based on the current date and time
+     * 
+     * @return current datetime with format "yyyy-MM-dd HH-mm-ss"
+     */
+    public String generateFileName()
+    {
+    	java.util.Date now = new java.util.Date();
+        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
+        return sdf.format(now);
+    }
 }

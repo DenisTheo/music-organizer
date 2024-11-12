@@ -1,0 +1,14 @@
+<webscript>
+    <shortname>Generate Playlist</shortname>
+    <description>Generates a music playlist (.xspf format) from a FTS filter (JS Version)</description>
+    
+    <url>/amexio/music/makeplaylist</url>
+    <url>/amexio/music/makeplaylist.html</url>
+    <url>/amexio/music/make-playlist</url>
+    <url>/amexio/music/make-playlist.html</url>
+    
+    <format default="xml"/>
+    
+    <authentication runas="admin">user</authentication>
+    <transaction>required</transaction>
+</webscript>

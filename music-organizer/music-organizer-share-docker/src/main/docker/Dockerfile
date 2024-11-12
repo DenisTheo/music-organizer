@@ -14,3 +14,7 @@ COPY share-config-custom.xml $TOMCAT_DIR/shared/classes/alfresco/web-extension
 
 COPY log4j.properties $TOMCAT_DIR/webapps/share/WEB-INF/classes
 COPY hotswap-agent.properties $TOMCAT_DIR/webapps/share/WEB-INF/classes
+
+# One or the Other
+RUN sed -i "s|<Context>|<Context>\n<Resources cachingAllowed=\"false\"/> |g" $TOMCAT_DIR/conf/context.xml ;
+#RUN sed -i "s|<Context>|<Context>\n<Resources cacheMaxSize=\"51200\"/> |g" $TOMCAT_DIR/conf/context.xml ;

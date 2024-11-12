@@ -19,21 +19,36 @@
 	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	   xsi:schemaLocation="http://www.springframework.org/schema/beans
           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+          
 	<bean id="webscript.alfresco.tutorials.helloworld.get"
-		  class="fr.amexio.platformsample.HelloWorldWebScript"
-		  parent="webscript">
+	class="fr.amexio.platformsample.HelloWorldWebScript" parent="webscript">
+	</bean>
+	<!--
+	<bean id="playlistMaker" class="fr.amexio.music.PlaylistMaker">
+        <property name="contentService">
+            <ref bean="ContentService"/>
+        </property>
+        <property name="nodeService">
+            <ref bean="NodeService"/>
+        </property>
+        <property name="mimetypeService">
+            <ref bean="MimetypeService"/>
+        </property>
 	</bean>
 	
-	<!--<bean id="webscript.fr.amexio.music.XSPFPlaylist.get"
-		  class="fr.amexio.music.XSPFPlaylist"
-		  parent="webscript">
-	    <property name="authentication" value="user"/>
-	    <property name="descPath" value="alfresco/module/music-organizer-platform/webscripts/fr/amexio/music/XSPFPlaylist.get.desc.xml"/>
-	    <property name="scriptPath" value="alfresco/module/music-organizer-platform/webscripts/fr/amexio/music/XSPFPlaylist.get.js"/>
-		<property name="useDefaultConfiguration" value="true"/>
-	    <property name="nodeService" ref="NodeService"/>
-	    <property name="contentService" ref="ContentService"/>
-	    <property name="mimetypeService" ref="MimetypeService"/>
-	</bean>-->
-
+	<bean id="webscript.fr.amexio.music.XSPFPlaylist.post"
+	class="fr.amexio.music.XSPFPlaylist" parent="webscript">
+        <property name="playlistMaker">
+            <ref bean="playlistMaker"/>
+        </property>
+        <property name="searchService">
+            <ref bean="SearchService"/>
+        </property>
+        <property name="contentService">
+            <ref bean="ContentService"/>
+        </property>
+        <property name="nodeService">
+            <ref bean="NodeService"/>
+        </property>
+    </bean> -->
 </beans>
