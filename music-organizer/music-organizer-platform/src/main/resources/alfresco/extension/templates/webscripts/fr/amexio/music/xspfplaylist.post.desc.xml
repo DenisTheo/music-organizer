@@ -6,9 +6,13 @@
     <url>/amexio/music/xspfplaylist.html</url>
     <url>/amexio/music/xspf-playlist</url>
     <url>/amexio/music/xspf-playlist.html</url>
+    <url>/amexio/music/XSPFPlaylist</url>
+    <url>/amexio/music/XSPFPlaylist.html</url>
+    <url>/amexio/music/XSPF-Playlist</url>
+    <url>/amexio/music/XSPF-Playlist.html</url>
     
-    <format default="xml"/>
+    <format default="xml">extension</format>
     
-    <authentication runas="admin">user</authentication>
+    <authentication>user</authentication>
     <transaction>required</transaction>
 </webscript>

@@ -23,7 +23,7 @@
 	<bean id="webscript.alfresco.tutorials.helloworld.get"
 	class="fr.amexio.platformsample.HelloWorldWebScript" parent="webscript">
 	</bean>
-	<!--
+
 	<bean id="playlistMaker" class="fr.amexio.music.PlaylistMaker">
         <property name="contentService">
             <ref bean="ContentService"/>
@@ -34,13 +34,12 @@
         <property name="mimetypeService">
             <ref bean="MimetypeService"/>
         </property>
+        <property name="searchService">
+            <ref bean="SearchService"/>
+        </property>
 	</bean>
 	
-	<bean id="webscript.fr.amexio.music.XSPFPlaylist.post"
-	class="fr.amexio.music.XSPFPlaylist" parent="webscript">
-        <property name="playlistMaker">
-            <ref bean="playlistMaker"/>
-        </property>
+	<bean id="webscript.fr.amexio.music.xspfplaylist.post" class="fr.amexio.music.XSPFPlaylist" parent="webscript">
         <property name="searchService">
             <ref bean="SearchService"/>
         </property>
@@ -50,5 +49,14 @@
         <property name="nodeService">
             <ref bean="NodeService"/>
         </property>
-    </bean> -->
+        <property name="quickShareService">
+            <ref bean="QuickShareService"/>
+        </property>
+        <property name="sysAdminParams">
+            <ref bean="sysAdminParams"/>
+        </property>
+        <property name="playlistMaker">
+            <ref bean="playlistMaker"/>
+        </property>
+    </bean>
 </beans>

@@ -17,6 +17,7 @@
  */
 package fr.amexio.platformsample;
 
+import fr.amexio.platformsample.*;
 import org.alfresco.rad.test.AbstractAlfrescoIT;
 import org.alfresco.rad.test.AlfrescoTestRunner;
 import org.alfresco.rad.test.Remote;

@@ -1,4 +1,4 @@
-//Goes to "Data Dictionary/Scripts"
+// Goes to "Data Dictionary/Scripts"
 
 logger.log(`document: ${document.displayPath}/${document.name}`);
 
@@ -10,7 +10,7 @@ if (!document.hasAspect("ax:ip"))
 }
 
 // list of key words to be skipped and not considered as IP Names
-var skip = ["other", "OST", "OP", "ED", "Manga PV", "Anime", "Movies", "Movie", "Game", "Film", "Series", "Music", "Company Home", "Mainstream"];
+var skip = ["other", "OST", "OP", "ED", "Manga PV", "Files", "Anime", "Movies", "Movie", "Game", "Film", "Series", "Music", "Company Home", "Mainstream", "Playlist"];
 
 // Fetches the current list of IPs on the node
 var listOfIPs = document.properties["ax:ipName"] || [];
