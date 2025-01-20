@@ -59,4 +59,27 @@
             <ref bean="playlistMaker"/>
         </property>
     </bean>
+	
+	<bean id="musicMetadataExtracter" class="fr.amexio.music.metadata.MusicExtracter"/>
+    
+	<bean id="metadataExtracterRegistry" parent="baseMetadataExtracterRegistry">
+	    <property name="metadataExtracters">
+	        <map>
+	            <entry key="audio/mpeg" value-ref="musicMetadataExtracter"/>
+	            <entry key="audio/flac" value-ref="musicMetadataExtracter"/>
+	            <entry key="audio/wav" value-ref="musicMetadataExtracter"/>
+	            <entry key="audio/x-wav" value-ref="musicMetadataExtracter"/>
+	            <entry key="audio/midi" value-ref="musicMetadataExtracter"/>
+	            <entry key="audio/x-midi" value-ref="musicMetadataExtracter"/>
+	            <entry key="audio/ogg" value-ref="musicMetadataExtracter"/>
+	            <entry key="audio/x-ms-wma" value-ref="musicMetadataExtracter"/>
+	            <entry key="audio/aac" value-ref="musicMetadataExtracter"/>
+	            <entry key="audio/mp4" value-ref="musicMetadataExtracter"/>
+	            <entry key="audio/x-aiff" value-ref="musicMetadataExtracter"/>
+	            <entry key="audio/aiff" value-ref="musicMetadataExtracter"/>
+	        </map>
+	    </property>
+	</bean>
+
+	
 </beans>
