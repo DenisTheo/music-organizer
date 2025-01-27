@@ -1,300 +1,197 @@
 package fr.amexio.music.metadata;
 
-import org.alfresco.repo.content.metadata.AbstractMappingMetadataExtracter;
-import org.alfresco.service.cmr.repository.ContentReader;
-import org.apache.tika.metadata.Metadata;
-import org.apache.tika.parser.AutoDetectParser;
-import org.apache.tika.sax.BodyContentHandler;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.Serializable;
-import java.util.*;
+//import org.alfresco.service.cmr.repository.ContentReader;
+//import org.alfresco.transform.tika.metadata.extractors.TikaAudioMetadataExtractor;
+//import org.apache.tika.metadata.Metadata;
+//import org.apache.tika.metadata.TikaCoreProperties;
+//import org.apache.tika.metadata.XMPDM;
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
+
+//import java.io.*;
+//import java.nio.charset.StandardCharsets;
+//import java.util.*;
+//import java.util.stream.Collectors;
 
 /**
- * Custom metadata extractor for processing music metadata. 
- * It extracts and maps composers and singers metadata to custom Alfresco aspects.
+ * ENDED UP NOT BEING USED WHATSOEVER, INGORE THIS CLASS
+ * I keep it to have a trace of the code for now
  */
-public class MusicExtracter extends AbstractMappingMetadataExtracter
+@Component
+public class MusicExtracter //extends TikaAudioMetadataExtractor
 {
-    private static final String DATA_SOURCE = "Data Dictionary/Music/";
+	/*private static final Logger logger = LoggerFactory.getLogger(MusicExtracter.class);
 
-    // Supported MIME types for music files
-    private static final Set<String> SUPPORTED_MIMETYPES = Set.of(
-        "audio/mpeg", "audio/flac", "audio/wav", "audio/x-wav", 
-        "audio/midi", "audio/x-midi", "audio/ogg", "audio/x-ms-wma", 
-        "audio/aac", "audio/mp4", "audio/x-aiff", "audio/aiff");
+	private static final String KEY_SONG_TITLE = "songTitle";
+	private static final String KEY_ALBUM_TITLE = "albumTitle";
+	private static final String KEY_YEAR_RELEASED = "yearReleased";
+	private static final String KEY_TRACK_NUMBER = "trackNumber";
+	private static final String KEY_DISC_NUMBER = "discNumber";
+	private static final String KEY_GENRE = "genre";
+	private static final String KEY_ARTIST = "artist";
+	private static final String KEY_COMPOSER = "composer";
 
-    // CSV data caches for composers and singers
-    private Map<String, List<String[]>> knownComposers;
-    private Map<String, List<String[]>> knownSingers;
+	private final Map<String, List<String>> composerMap = new HashMap<>();
+	private final Map<String, List<String>> artistMap = new HashMap<>();
 
-    /**
-     * Constructor initializing supported MIME types.
-     */
-    public MusicExtracter()
-    {
-        super(SUPPORTED_MIMETYPES);
-    }
+	public MusicExtracter()
+	{
+		super(logger);
+		loadCsvFiles(); // Load CSV files at instantiation
+	}*/
 
-    /**
-     * Extracts specific metadata and processes it into the destination map.
-     * 
-     * @param reader The content reader for accessing the file content.
-     * @param destination The destination map to store extracted metadata.
-     * 
-     * @throws Throwable If any error occurs during extraction.
-     */
-    protected void extractSpecific(ContentReader reader, Map<String, Serializable> destination) throws Throwable
-    {
-        if (knownComposers == null || knownSingers == null)
-            extractCsvData();
+	/**
+	 * Extracts metadata specific to music files.
+	 *
+	 * @param metadata   The Tika metadata object.
+	 * @param properties The Alfresco properties map.
+	 * @param headers    HTTP headers (unused).
+	 * @return The updated properties map.
+	 */
+	// @Override
+	/*protected Map<String, Serializable> extractSpecific(Metadata metadata, Map<String, Serializable> properties, Map<String, String> headers)
+	{
+		super.extractSpecific(metadata, properties, headers);
 
-        Metadata tikaMetadata = extractMetadataWithTika(reader);
-        copyMetadata(tikaMetadata, destination);
+		// Extract basic music metadata
+		extractBasicMetadata(metadata, properties);
 
-        processArtists(destination, "composer", knownComposers, "ax:composer", "ax:composerName");
-        processArtists(destination, "artist", knownSingers, "ax:singer", "ax:singerName");
-    }
+		// Extract and process artists and composers
+		processArtistsAndComposers(metadata, properties);
 
-    /**
-     * Extracts metadata using Apache Tika.
-     * 
-     * @param reader The content reader for accessing the file content.
-     * 
-     * @return The extracted metadata.
-     * 
-     * @throws Exception If any error occurs during metadata extraction.
-     */
-    private Metadata extractMetadataWithTika(ContentReader reader) throws Exception
-    {
-        Metadata metadata = new Metadata();
-        BodyContentHandler handler = new BodyContentHandler();
-        AutoDetectParser parser = new AutoDetectParser();
+		return properties;
+	}*/
 
-        try (InputStreamReader isr = new InputStreamReader(reader.getContentInputStream()))
-        {
-            parser.parse(reader.getContentInputStream(), handler, metadata);
-        } catch (Exception e)
-        {
-        	throw e;
-        }
+	/**
+	 * Extracts basic metadata like title, album, etc.
+	 */
+	/*private void extractBasicMetadata(Metadata metadata, Map<String, Serializable> properties)
+	{
+		putRawValue(KEY_SONG_TITLE, getTitle(metadata), properties);
+		putRawValue(KEY_ALBUM_TITLE, metadata.get(XMPDM.ALBUM), properties);
+		putRawValue(KEY_TRACK_NUMBER, metadata.get(XMPDM.TRACK_NUMBER), properties);
+		putRawValue(KEY_DISC_NUMBER, metadata.get(XMPDM.DISC_NUMBER), properties);
+		putRawValue(KEY_GENRE, metadata.get(XMPDM.GENRE), properties);
+		putRawValue(KEY_YEAR_RELEASED, metadata.get(XMPDM.RELEASE_DATE), properties);
+	}*/
 
-        return metadata;
-    }
+	/**
+	 * Extracts the song title from file metadata, falling back to the file name if no title is found
+	 */
+	/*private String getTitle(Metadata metadata)
+	{
+		String title = metadata.get(TikaCoreProperties.TITLE);
+		
+		if (title == null || title.isEmpty())
+		{
+			ContentReader reader = getContentReader(); // Placeholder, WIP
+			
+			if (reader != null)
+			{
+				String fileName = reader.getContentUrl(); // Retrieve the file name
+				fileName = fileName.substring(fileName.lastIndexOf('/') + 1); // Remove path
+				return fileName.replaceFirst("[.][^.]+$", ""); // Remove extension
+			}
+		}
+		
+		return title;
+	}*/
 
-    /**
-     * Copies metadata from a source to a destination map.
-     * 
-     * @param source The source metadata.
-     * @param destination The destination map to store metadata.
-     */
-    private void copyMetadata(Metadata source, Map<String, Serializable> destination)
-    {
-    	// Generates a title from file name if none is found in the file's metadata
-        destination.put("title", source.get("title") != null ? source.get("title") : source.get("name").replaceAll("\\.[^\\.]+$", ""));
-        destination.put("album", source.get("album"));
-        destination.put("artist", source.get("artist"));
-        destination.put("genre", source.get("genre"));
-        destination.put("year", parseInteger(source.get("year")));
-        destination.put("track_number", parseInteger(source.get("track_number")));
-        destination.put("disc_number", parseInteger(source.get("disc_number")));
-    }
+	/**
+	 * Processes artists and composers from metadata and updates properties.
+	 */
+	/*private void processArtistsAndComposers(Metadata metadata, Map<String, Serializable> properties)
+	{
+		String artists = metadata.get(XMPDM.ARTIST);
+		String composers = metadata.get(XMPDM.COMPOSER);
 
-    /**
-     * Processes artist metadata and adds it to the destination map.
-     * 
-     * @param destination The destination map for metadata.
-     * @param key The metadata key to process (e.g., "composer").
-     * @param csvData The CSV data containing known artist information.
-     * @param aspect The aspect to add if matches are found.
-     * @param property The property to store matched artist names.
-     */
-    private void processArtists(Map<String, Serializable> destination, String key, Map<String, List<String[]>> csvData, String aspect, String property)
-    {
-        if (destination.containsKey(key) && destination.get(key) != null)
-        {
-            String[] values = destination.get(key).toString().split(",");
-            List<String> matches = new ArrayList<>();
-            List<String> unmatched = new ArrayList<>();
+		Set<String> resolvedArtists = resolveNames(artists, artistMap);
+		Set<String> resolvedComposers = resolveNames(composers, composerMap);
 
-            for (String value : values)
-            {
-                String normalizedValue = normalize(value);
-                boolean matched = false;
+		if (!resolvedArtists.isEmpty())
+			properties.put(KEY_ARTIST, new ArrayList<>(resolvedArtists));
 
-                for (List<String[]> rows : csvData.values())
-                {
-                    for (String[] row : rows)
-                    {
-                        for (String name : row)
-                        {
-                            if (normalize(name).equals(normalizedValue))
-                            {
-                                if (!matches.contains(row[0]))
-                                    matches.add(row[0]);
+		if (!resolvedComposers.isEmpty())
+			properties.put(KEY_COMPOSER, new ArrayList<>(resolvedComposers));
+	}*/
 
-                                matched = true;
-                                break;
-                            }
-                        }
-                        
-                        if (matched)
-                            break;
-                    }
-                    
-                    if (matched)
-                        break;
-                }
+	/**
+	 * Resolves names from metadata using the mapping from CSV.
+	 */
+	/*private Set<String> resolveNames(String rawNames, Map<String, List<String>> nameMap)
+	{
+		if (rawNames == null || rawNames.isEmpty())
+			return Collections.emptySet();
 
-                if (!matched)
-                    unmatched.add(value);
-            }
+		Set<String> resolvedNames = new HashSet<>();
+		
+		String[] names = rawNames.split(","); // Split names by comma
+		for (String name : names)
+		{
+			name = name.trim();
+			
+			if (nameMap.containsKey(name))
+				resolvedNames.addAll(nameMap.get(name)); // Adds all matching values
+			else
+				resolvedNames.add(name); // If no match, adds the raw name
+		}
+		
+		return resolvedNames;
+	}*/
 
-            if (!matches.isEmpty())
-            {
-                destination.put(property, matches.toArray(new String[0]));
-                addAspectIfNecessary(destination, aspect);
-            }
+	/**
+	 * Loads CSV files for artist and composer mappings.
+	 */
+	/*private void loadCsvFiles()
+	{
+		try
+		{
+			composerMap.putAll(loadCsv("composer.csv"));
+			artistMap.putAll(loadCsv("artist.csv"));
+		} catch (IOException e)
+		{
+			logger.error("Error loading CSV files: ", e);
+		}
+	}*/
 
-            if (!unmatched.isEmpty())
-            {
-                System.out.println("No match found for " + key + ": " + unmatched);
-            }
-        }
-    }
+	/**
+	 * Loads a CSV file into a mapping of name to aliases.
+	 *
+	 * @param fileName The CSV file name.
+	 * 
+	 * @return A map of names to their aliases.
+	 * 
+	 * @throws IOException If an error occurs while reading the file.
+	 */
+	/*private Map<String, List<String>> loadCsv(String fileName) throws IOException
+	{
+		Map<String, List<String>> map = new HashMap<>();
+		
+		try 
+		{
+			InputStream inputStream = getClass().getClassLoader().getResourceAsStream(fileName);
+			BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
 
-    /**
-     * Adds an aspect to the destination map if it does not already exist.
-     * 
-     * @param destination The destination map for metadata.
-     * @param aspect The aspect to add.
-     */
-    @SuppressWarnings("unchecked") // Not the best
-	private void addAspectIfNecessary(Map<String, Serializable> destination, String aspect)
-    {
-        List<String> aspects = new ArrayList<>();
-
-        if (destination.get("aspects") instanceof List<?>)
-        {
-            // List<String> Type Check
-            List<?> tempList = (List<?>) destination.get("aspects");
-
-            if (tempList.stream().allMatch(item -> item instanceof String))
-                aspects = (List<String>) tempList;
-            else
-                throw new IllegalStateException("The 'aspects' key does not contain a List<String>");
-        }
-
-        // Adds Aspect if needed
-        if (!aspects.contains(aspect))
-        {
-            aspects.add(aspect);
-            destination.put("aspects", (Serializable) aspects);
-        }
-    }
-
-    /**
-     * Loads and normalizes CSV data from a file.
-     * 
-     * @param filePath The path to the CSV file.
-     * 
-     * @return A map containing the loaded CSV data.
-     */
-    private Map<String, List<String[]>> loadCsvFile(String filePath)
-    {
-        Map<String, List<String[]>> data = new HashMap<>();
-
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(filePath))))
-        {
-            for (String line; (line = br.readLine()) != null;)
-            {
-                String[] parts = line.split(",");
-                String key = normalize(parts[0]);
-                data.putIfAbsent(key, new ArrayList<>());
-                data.get(key).add(parts);
-            }
-        } catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-
-        return data;
-    }
-
-    /**
-     * Extracts all raw metadata from a content reader.
-     * 
-     * @param reader The content reader.
-     * 
-     * @return A map of raw metadata.
-     * 
-     * @throws Throwable If any error occurs during extraction.
-     */
-    @Override
-    protected Map<String, Serializable> extractRaw(ContentReader reader) throws Throwable
-    {
-        Map<String, Serializable> rawMetadata = new HashMap<>();
-
-        Metadata tikaMetadata = extractMetadataWithTika(reader);
-
-        for (String name : tikaMetadata.names())
-        {
-            String value = tikaMetadata.get(name);
-
-            if (value != null)
-                rawMetadata.put(name, value);
-        }
-
-        return rawMetadata;
-    }
-
-    /**
-     * Extracts CSV data for composers and singers.
-     */
-    private void extractCsvData()
-    {
-        knownComposers = loadCsvFile(DATA_SOURCE + "composers.csv");
-        knownSingers = loadCsvFile(DATA_SOURCE + "vocal_artists.csv");
-    }
-
-    /**
-     * Normalizes a string by converting it to lowercase and removing non-alphanumeric characters.
-     * 
-     * @param value The string to normalize.
-     * 
-     * @return The normalized string.
-     */
-    private String normalize(String value)
-    {
-        return value == null ? "" : value.toLowerCase().replaceAll("[^a-z0-9]", "");
-    }
-
-    /**
-     * Parses a string into an integer, returning -1 if the parsing fails.
-     * 
-     * @param value The string to parse.
-     * 
-     * @return The parsed integer or -1 if parsing fails.
-     */
-    private int parseInteger(String value)
-    {
-        try
-        {
-            return Integer.parseInt(value);
-        } catch (NumberFormatException e)
-        {
-            return -1;
-        }
-    }
-
-    /**
-     * Returns the supported MIME types.
-     * 
-     * @return A set of supported MIME types.
-     */
-    //@Override
-    public Set<String> getSupportedMimeTypes()
-    {
-        return SUPPORTED_MIMETYPES;
-    }
+			String line;	
+			while ((line = reader.readLine()) != null)
+			{
+				String[] entries = line.split(";");
+				
+				if (entries.length > 0)
+				{
+					String key = entries[0].trim();
+					
+					List<String> values = Arrays.stream(entries).map(String::trim).collect(Collectors.toList());
+					map.put(key, values);
+				}
+			}
+			
+			return map;
+		} catch (IOException e)
+		{
+			throw e;
+		}
+			
+	}*/
 }

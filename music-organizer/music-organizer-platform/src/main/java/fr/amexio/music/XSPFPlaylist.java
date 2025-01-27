@@ -113,6 +113,7 @@ public class XSPFPlaylist extends DeclarativeWebScript
 					
 					//title
 					String title = (String) nodeService.getProperty(node, QName.createQName("{http://www.amexio.fr/model/music/1.0}songTitle"));
+					
 					if(title != null && !title.trim().equals(""))
 					{
 						music.setTitle(title);

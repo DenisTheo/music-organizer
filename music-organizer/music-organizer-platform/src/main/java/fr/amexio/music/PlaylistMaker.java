@@ -146,6 +146,7 @@ public class PlaylistMaker
         
         // Search for/Create the Playlist Folder
         NodeRef playlistFolder = nodeService.getChildByName(musicFolder, ContentModel.ASSOC_CONTAINS, "Playlist");
+        
         if (playlistFolder == null)
         {
             Map<QName, Serializable> folderProps = new HashMap<>();
